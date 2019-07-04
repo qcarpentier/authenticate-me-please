@@ -1,13 +1,14 @@
 const express = require('express');
 const expressLayouts = require('express-ejs-layouts');
 const mongoose = require('mongoose');
+const cors = require('cors');
 require ('dotenv').config();
 
 const app = express();
 
 // Connect to MongoDB
 const uri = process.env.ATLAS_URI;
-mongoose.connect(uri, {useNewUrlParser: true})
+mongoose.connect(uri, {useNewUrlParser: true, useCreateIndex: true})
 
 const connection = mongoose.connection;
 connection.once('open', () => {
@@ -17,6 +18,9 @@ connection.once('open', () => {
 // EJS
 app.use(expressLayouts);
 app.set('view engine', 'ejs');
+
+// Bodyparser
+app.use(express.urlencoded({extended: false}));
 
 // Routes
 app.use('/', require('./routes/index'));
