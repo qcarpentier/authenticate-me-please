@@ -8,7 +8,7 @@ const app = express();
 
 // Connect to MongoDB
 const uri = process.env.ATLAS_URI;
-mongoose.connect(uri, {useNewUrlParser: true, useCreateIndex: true})
+mongoose.connect(uri, {useNewUrlParser: true, useCreateIndex: true});
 
 const connection = mongoose.connection;
 connection.once('open', () => {
